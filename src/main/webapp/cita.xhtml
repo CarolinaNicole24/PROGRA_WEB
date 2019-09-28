@@ -1,0 +1,71 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de citas:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Cita</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel for="idCita" value="Id" styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="idCita"
+				styleClass="form-control"
+				value="#{citaController.cita.idCita}" required="true" />
+
+			<h:outputLabel for="nombreCita" value="Nombre del cita"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="nombreCita"
+				styleClass="form-control"
+				value="#{citaController.cita.nombreCita}" maxlength="30"
+				required="true" />
+
+			<h:outputLabel for="numeroCita" value="Numero telefonico"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="numeroCita"
+				styleClass="form-control"
+				value="#{citaController.cita.numeroCita}" maxlength="9"
+				required="true" />
+		
+            <p:outputLabel for="mantenimientoCita" value="Mantenimiento:" />
+			<p:selectOneMenu id="mantenimientoCita"
+				value="#{citaController.cita.mantenimientoCita}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{citaController.listaMantenimiento}"
+					var="e" itemLabel="#{e.nombreMantenimiento}" itemValue="#{e}" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<p:commandButton value="Grabar"
+				actionListener="#{citaController.insertar()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listCita?faces-redirect=true" style=" background-Color:#b5121c; border-Color:#b5121c"/>
+			<p:commandButton value="Cancelar"
+				action="listCita?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition>
+</html>
+

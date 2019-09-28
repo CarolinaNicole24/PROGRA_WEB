@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de asesores:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Asesor</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel for="idAsesor" value="Id" styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="idAsesor"
+				styleClass="form-control"
+				value="#{asesorController.asesor.idAsesor}" required="true" />
+
+			<h:outputLabel for="nombreAsesor" value="Nombre del asesor"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="nombreAsesor"
+				styleClass="form-control"
+				value="#{asesorController.asesor.nombreAsesor}" maxlength="30"
+				required="true" />
+
+			<h:outputLabel for="numeroAsesor" value="Numero telefonico"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="numeroAsesor"
+				styleClass="form-control"
+				value="#{asesorController.asesor.numeroAsesor}" maxlength="9"
+				required="true" />
+
+			<h:outputLabel for="tiempoExpAsesor" value="Años de experiencia"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="tiempoExpAsesor"
+				styleClass="form-control"
+				value="#{asesorController.asesor.tiempoExpAsesor}" maxlength="2"
+				required="true" />
+
+            <p:outputLabel for="mantenimientoAsesor" value="Mantenimiento:" />
+			<p:selectOneMenu id="mantenimientoAsesor"
+				value="#{AsesorController.Asesor.mantenimientoAsesor}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{AsesorController.listaMantenimiento}"
+					var="e" itemLabel="#{e.nombreMantenimiento}" itemValue="#{e}" />
+			</p:selectOneMenu>
+            
+			<br />
+
+
+			<p:commandButton value="Grabar"
+				actionListener="#{asesorController.insertar()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listAsesor?faces-redirect=true" style=" background-Color:#b5121c; border-Color:#b5121c"/>
+			<p:commandButton value="Cancelar"
+				action="listAsesor?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition>
+</html>
+
